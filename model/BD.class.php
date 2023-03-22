@@ -59,7 +59,7 @@ $st = $conn->prepare($sql);
 $st->execute();
 }
 
-public function buscar($name_tabela, $dados)
+public function pesquisar($name_tabela, $dados)
   {
     $campo = $dados['campo'];
     $valor = $dados['valor'];
@@ -70,6 +70,15 @@ public function buscar($name_tabela, $dados)
     $st->execute();
     
     return $st->fetchAll(PDO::FETCH_CLASS);
+  }
+
+  public function buscar($name_tabela, $id)
+  {
+    $conn = $this->conn();
+    $sql = "SELECT * from $name_tabela WHERE id=$id;";
+    $st = $conn->prepare($sql);
+    $st->execute();
+    return $st->fetchObject();
   }
 
 
